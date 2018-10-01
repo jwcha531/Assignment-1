@@ -1,2 +1,2 @@
 # Assignment-1
-### Statistics course
+### Statistics course - Master 2
