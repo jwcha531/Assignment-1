@@ -141,11 +141,9 @@ install.packages(&quot;dplyr&quot;)</code></pre>
 library(ggplot2)
 library(dplyr)</code></pre>
 <ol style="list-style-type: decimal">
-<li>Dans le cas de <strong>tibble</strong>, nous pouvons manipuler des data frames. Nous pouvons le travailler sur le site suivant ;<br />
-<a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html" class="uri">https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html</a></li>
-<li>Dans le cas de <strong>ggplot2</strong>, nous pouvons produire un graphie à partir de données. Nous pouvons le travailler sur le site suviant ; <a href="https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf" class="uri">https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf</a></li>
-<li>Dans le cas de <strong>dplyr</strong>, nous pouvons manipuler des données. Nous pouvons le travailler sur le site suivant ;<br />
-<a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf" class="uri">https://cran.r-project.org/web/packages/dplyr/dplyr.pdf</a></li>
+<li>Dans le cas de <strong>tibble</strong>, nous pouvons manipuler des data frames.</li>
+<li>Dans le cas de <strong>ggplot2</strong>, nous pouvons produire un graphie à partir de données.</li>
+<li>Dans le cas de <strong>dplyr</strong>, nous pouvons manipuler des données.</li>
 </ol>
 </div>
 <div id="code-chunk" class="section level4">
@@ -188,9 +186,9 @@ fake_data_set &lt;- tibble::data_frame(`Fake measurement`=fake_data_points)</cod
 <p>** La function <strong>runif(x)</strong> produit x nombres alétoirement. En plus, en général, nous pouvons utiliser la function <strong>simple</strong> pour obtenir un nombre facultatif.</p>
 <p>Nou pouvons d’abord vérifier les 2 résultats différents suivants : 1ère fonction et 2ème fonction de <strong>runif</strong>, qui composent des nombres de l’ordre altétoire.</p>
 <pre class="r"><code>runif(3)</code></pre>
-<pre><code>## [1] 0.008024464 0.070189456 0.939375363</code></pre>
+<pre><code>## [1] 0.6913539 0.3353922 0.1257533</code></pre>
 <pre class="r"><code>runif(3)</code></pre>
-<pre><code>## [1] 0.8878365 0.2598293 0.1768723</code></pre>
+<pre><code>## [1] 0.4694237 0.5798435 0.7418793</code></pre>
 <p>En revanche, nous pouvons voir les mêmes 2 résultats suivants.</p>
 <pre class="r"><code>set.seed(1)
 runif(3)</code></pre>

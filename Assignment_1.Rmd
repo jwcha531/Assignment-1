@@ -23,14 +23,8 @@ library(dplyr)
 ```
 
 1. Dans le cas de **tibble**, nous pouvons manipuler des data frames.
-   Nous pouvons le travailler sur le site suivant ;    
-     https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html
 2. Dans le cas de **ggplot2**, nous pouvons produire un graphie à partir de données.
-   Nous pouvons le travailler sur le site suviant ;
-     https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf
 3. Dans le cas de **dplyr**, nous pouvons manipuler des données.
-   Nous pouvons le travailler sur le site suivant ;  
-    https://cran.r-project.org/web/packages/dplyr/dplyr.pdf  
 
 #### Code Chunk 
 ```{r}
