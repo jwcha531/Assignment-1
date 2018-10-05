@@ -107,7 +107,6 @@ ggplot2::ggplot(fake_data_set,
 
 ```
 
-#### Statement 6. data.frame (Ligne derniere) :
 
 
 ## Exercice 3
