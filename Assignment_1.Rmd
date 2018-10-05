@@ -1,0 +1,314 @@
+---
+title: "Assignment 1"
+author: "CHA JINWOO"
+date: "25/09/2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+# Exercise 2  
+
+#### Packages utilisées
+Tout d'abord, nous devons installer des 3 packages comme ci-dessous ;  
+```{r eval=FALSE}
+install.packages("tiddly")
+install.packages("ggplot2")
+install.packages("dplyr")
+```
+
+Ensuite, nous devons les commander comme ci-dessous sur le script pour les utiliser 
+```{r message=FALSE, warning=FALSE}
+library(tibble)
+library(ggplot2)
+library(dplyr)
+```
+
+1. Dans le cas de **tibble**, nous pouvons manipuler des data frames.
+   Nous pouvons le travailler sur le site suivant ;    
+     https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html
+2. Dans le cas de **ggplot2**, nous pouvons produire un graphie à partir de données.
+   Nous pouvons le travailler sur le site suviant ;
+     https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf
+3. Dans le cas de **dplyr**, nous pouvons manipuler des données.
+   Nous pouvons le travailler sur le site suivant ;  
+    https://cran.r-project.org/web/packages/dplyr/dplyr.pdf  
+
+#### Code Chunk 
+```{r}
+
+possible_outcomes <- c(0, 1, 2, 3, 4, 5)
+outcome_probabilities <- c(0.1, 0.5, 0.2, 0.1, 0.05, 0.05)
+n_data_points <- 400
+
+set.seed(1)
+fake_data_points <- sample(possible_outcomes,
+                           n_data_points,
+                           replace=T,
+                           prob=outcome_probabilities)
+set.seed(NULL)
+fake_data_set <- tibble::data_frame(`Fake measurement`=fake_data_points)
+
+```
+ 
+#### Statement 1. possible_outcomes (ligne 1) 
+
+Cette ligne attribue une variable à **possible_outcomes**. Cette variable est un vecteur pour trasmettre les données que l'on a besoin. C'est-à-dire, la variable **possible_outcomes** prend une vecteur composée les 5 éléments (0, 1, 2, 3, 4, 5).  
+  
+#### Statement 2. outcome_probabilities (Ligne 2) :   
+
+Cette linge attribue une variable à **outcome_probabilites**. Nous pouvons supposer que cette variable est un vecteur concernant la variable précédente **possible_outcomes**. Parce que si nous lanchons les variables après avoir écrit, dans les variables **possible_outcomes** ou **outcome_probabilites**, plus un ou moins un, en étape de **statement 5**, nous ranconterions une erreur sur notre console comme ci-dessous, lors de la création de la variable. **fake_data_points** :
+```{r eval=FALSE}
+Error in sample.int(lenght(x), size, replace, prob) : incorrect number of probabilites   
+```
+  
+#### Statement 3. n_data_points (Ligne 3) :  
+
+Dans cette ligne 3, nous assignons à la variable que le nombre 400 correspond. Nous pouvons supposer cette variable qui est au total "data points"
+  
+#### Statement 4. set.seed(1) (Ligne 4) et set.seed(NULL) (Ligne 6) :  
+
+Quand nous créons un nombre altéatoire fixant un même résultat, nous utilisons la function **set.seed(x)**.  
+**x** signifie un nombre que nous voulons
+**set** représente une commande pour traiter les données et les informations.  
+**seed** représente un nombre et permet de fixer l'alétoirité des fonction créant les données et les informations alétoirees.  
+
+Pour comprendre plus facilement, nous vérifierons un exemple suivant en le comparant ;  
+
+1. quand nous n'employons qu'une fonction **runif(x)**.
+2. quand nous employons d'abord la function **set.seed(x)**, ensuite nous utilisons la fonction **runif(x)**.  
+
+** La function **runif(x)** produit x nombres alétoirement. En plus, en général, nous pouvons utiliser la function **simple**  pour obtenir un nombre facultatif.
+
+Nou pouvons d'abord vérifier les 2 résultats différents suivants : 1ère fonction et 2ème fonction de **runif**, qui composent des nombres de l'ordre altétoire.
+```{r}
+runif(3)
+runif(3)
+```
+En revanche, nous pouvons voir les mêmes 2 résultats suivants.
+```{r}
+set.seed(1)
+runif(3)
+set.seed(1)
+runif(3)
+```
+la fonction **set.seed(NULL)** représente annuler l'effet de fixation de l'alétoirité après cette ligne.  
+
+- Je me le suis référé sur le site : http://rfunction.com/archives/62 
+
+
+#### Statement 5. fake_data_points (ligne 5) : 
+
+La variable **fake_data_points** attribue une fonction **sample(x)**.
+Dans la fonction **sample**, l'arguement **possible_outcomes** qui est reorganise le vectuer de chiffre 0 à 5.  
+L'argument **n_data_points** qui représente la taille de la sortie. C'est-à-dire, nous pouvons tirer 400 chiffres de 0 à 5.  
+L'argument **replace**, si nous voulons prendre les mêmes taille de la variable, il faudrait que nous commandions "TRUE ou T". Mais si nous voulons obtenir les tailles différentes, il faudrait que nous commandions "FALSE ou F". Cependant, Vu que l'argument **replace** est **TRUE**. Bien que la taille du vecteur en entrée soit plus grande; nous autorisons et réduisons la taille du vecteur en sortie.  
+Dernièrement, l'argument **prob** représente la probabilité de chaque un chiffre de la variable **possible_outcomes**.  
+C'est-à-dire, nous l'assignons comme suivant :  
+[0 - 10%, 1 - 50%, 2 - 20%, 3 - 10%, 4 - 5%, 5 - 5%]
+
+En conséquence, nous pouvons comprendre que la taille de la variable **possible_outcomes** et de la variable **outcomes_probabilites** est pareille.
+
+
+```{r, echo=FALSE}
+ggplot2::ggplot(fake_data_set,
+                ggplot2::aes(x=`Fake measurement`)) + ggplot2::geom_histogram(bins=5, colour="black", fill="lightgrey")
+
+```
+
+#### Statement 6. data.frame (Ligne derniere) :
+
+
+# Exercise 3
+
+```{r echo=FALSE}
+source("function.R")
+```
+
+
+# Exercise 4
+#### 4.a
+```{r}
+# Return a violin plot.
+#
+# ARGUMENTS:
+# d: a data frame or tibble
+# var: the name of a column of d containing the dependent variable, provided as a
+#     string
+# grouping_var: the name of a column of d containing a grouping variable,
+#               provided as a string
+#
+# RETURN VALUE:
+# A ggplot plot object containing a violin plot, grouped by the values
+# of the grouping variable.
+
+grouped_violin_plot <- function(d, var, grouping_var) {
+  # Create the base ggplot object
+  # 4.a : 
+  p <- ggplot2::ggplot(d, ggplot2::aes_string(y=var,x=grouping_var, fill=grouping_var)) + ggplot2::geom_violin()
+    p + ggplot2::labs(title = "Iris data")
+    p + ggplot2::scale_fill_manual(values = c("#FFFF66", "#0099CC", "#996633"))
+    
+
+  return(p)
+}
+print(grouped_violin_plot(iris, "Sepal.Length", "Species"))
+```
+
+#### 4.b 
+```{r}
+p <- grouped_violin_plot(iris,"Sepal.Length", "Species") + 
+  ggplot2::scale_fill_manual(values = c("red", "blue", "grey")) +
+  ggplot2::ggtitle("Iris data")
+print(p) 
+```
+
+
+# Exercise 5
+
+#### Exercise 5.a
+
+```{r}
+# Difference in the medians between two groups.
+#
+# ARGUMENTS:
+# d: a data frame or tibble
+# var: the name of a column of d containing the dependent variable, provided as a string
+# grouping_var: the name of a column of d containing a grouping variable, provided as a string
+# group1: the value of grouping_var that corresponds to the first group
+# group2: the value of grouping_var that corresponds to the second group
+#
+# RETURN VALUE:
+# The median value of var for the first group, minus the median value of var for the second
+# group.
+difference_in_medians <- function(data, var, grouping_var, group1, group2) {
+  d_1 <- dplyr::filter(data, get(grouping_var) == group1)
+  d_2 <- dplyr::filter(data, get(grouping_var) == group2)
+  return(median(d_1[[var]])-median(d_2[[var]]))
+  # [[var]] renvoie le contenu de la colonne tandis que [var] renvoie une dataframe
+}
+
+difference_in_medians(iris, "Sepal.Width", "Species", "versicolor", "virginica") # - 0.2
+difference_in_medians(iris, "Sepal.Width", "Species", "virginica", "virginica") # 0
+
+```
+
+#### Exercise 5.b
+
+```{r}
+randomize_rts <- function(d){
+  
+  n <- length(d)
+  result <- sample(d, n)
+  return(result)
+}
+
+# Randomize the order of a column.
+#
+# ARGUMENTS:
+# d: a data frame or tibble
+# var: the name of a column of d containing the variable to randomize,
+#      provided as a string
+#
+# RETURN VALUE:
+# A data frame or tibble exactly the same as d, except with the order of
+# var permuted randomly.
+#
+randomize <- function(d, var) {
+    d[[var]] <- randomize_rts(d[[var]])
+    return(d) 
+}
+
+iris$Sepal.Width[1:10]
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+randomize(iris, "Sepal.Width")$Sepal.Width[1:10]
+randomize(iris, "Species")$Species[1:10]
+randomize(iris, "Species")$Sepal.Width[1:10]
+set.seed(previous_seed)
+
+```
+
+#### Exercise 5.c  
+
+```{r}
+# Perform a permutation test for two groups.
+#
+# ARGUMENTS:
+# d: a data frame or tibble
+# var: the name of the column in d on which the test statistic will be calculated,
+#      provided as a string
+# grouping_var: the name of the column in d which gives the grouping
+# group1: the value of grouping_var corresponding to the first group
+# group2: the value of grouping_var corresponding to the second group
+# statistic: a function yielding a test statistic, which takes as input
+#            a data frame, the name of a variable on which to calculate the
+#            test statistic, the name of a grouping variable, the value of
+#            the grouping variable corresponding to the first group, and
+#            the value of the grouping variable corresponding to the second
+#            group
+# n_samples: the number of permutation samples to draw (default: 9999)
+#
+# RETURN VALUE:
+#
+# A list containing two elements:
+#
+#  - observed: the value of statistic() in d
+#  - permuted: a vector containing the values of statistic() under n_samples
+#              permutations
+#
+permutation_twogroups <- function(d, var, grouping_var, 
+                                  group1, group2, 
+                                  statistic,
+                                  n_samples=9999) {
+  observed_statistic <- statistic(d, var, grouping_var, group1, group2)
+  permutation_statistics <- rep(0, n_samples)
+  for (i in 1:n_samples) {
+    data_randomized <- randomize(d, var)
+    permutation_statistics[i] <- difference_in_medians(data_randomized,var,grouping_var, group1, group2)
+  }
+  result <- list(observed=observed_statistic,
+                 permuted=permutation_statistics)
+  return(result)
+}
+
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+ptest_1 <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
+                                 "virginica", difference_in_medians, n_samples=10)
+ptest_2 <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
+                                 "virginica", difference_in_medians, n_samples=10)
+ptest_3 <- permutation_twogroups(randomize(iris, "Sepal.Width"), "Sepal.Width", "Species", "versicolor",
+                                 "virginica", difference_in_medians, n_samples=10)
+set.seed(previous_seed)
+print(ptest_1)
+print(ptest_2)
+print(ptest_3)
+print(ptest_3$observed)
+print(ptest_3[["observed"]])
+
+```
+
+#### Exercice 5.d
+Il n'est pas important si nous sommmes **var** ou **grouping_var** dans le test de permeutation. Parce que nous pouvons obtenir le même résultat, si nous échangons les variables **var** et **grouping_var** dans la fonction **permutation_twogroups_permuted**. 
+
+#### Exercice 5.e
+```{r}
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+ptest <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
+                               "virginica", difference_in_medians)
+set.seed(previous_seed)
+```
+
+```{r}
+ptest_d <- tibble::as_tibble(ptest["permuted"])
+p <- ggplot2::ggplot(ptest_d, ggplot2::aes_string(x="permuted")) +
+     ggplot2::geom_histogram(fill="orange",colour="black") + 
+     ggplot2::geom_vline(xintercept=ptest[["observed"]])
+print(p) 
+```
